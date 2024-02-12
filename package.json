@@ -4,8 +4,22 @@
   "description": "A tool that allows you to drop an API so you can make your own tierlist",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
   },
   "author": "Jérémy Payet",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pikashi974/Tierlist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Pikashi974/Tierlist/issues"
+  },
+  "homepage": "https://github.com/Pikashi974/Tierlist#readme"
 }
