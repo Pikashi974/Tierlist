@@ -56,7 +56,7 @@ function addRows(current, numberRow) {
                         </div>
                         <div class="tier sort" ondrop="drop_handler(event)" ondragover="dragover_handler(event);"></div>
                         <div class="settings-control">
-                            <div class="settings" data-bs-toggle="modal" data-bs-target="#modalParameters">
+                            <div class="settings" data-bs-toggle="modal" data-bs-target="#modalParameters" onclick="formParameters(${index});">
                                 <i class="bi bi-gear-fill"></i>
                             </div>
                             
@@ -77,4 +77,19 @@ function deleteRows(numberRow) {
     container[value].remove();
   }
   // }
+}
+
+function exportImage() {
+  document.querySelectorAll(".settings-control").forEach((element) => {
+    element.classList.toggle("d-none");
+  });
+  domtoimage.toPng(tierContainer).then(function (dataUrl) {
+    var link = document.createElement("a");
+    link.download = "Tierlist.png";
+    link.href = dataUrl;
+    link.click();
+  });
+  document.querySelectorAll(".settings-control").forEach((element) => {
+    element.classList.toggle("d-none");
+  });
 }
