@@ -1,4 +1,5 @@
 const toggleSearchFilters = document.querySelector("#toggleSearchFilters");
+const searchCards = document.querySelector("#searchCards");
 const tierContainer = document.querySelector("#tier-container");
 const typefilter = document.querySelector("#filter-type");
 const attributefilter = document.querySelector("#filter-attribute");
@@ -33,10 +34,15 @@ function init() {
         document.querySelector(`#card${idObj}`).value = element.value;
       });
     });
+  document.querySelectorAll(".settings").forEach((gear, index) => {
+    gear.addEventListener("click", () => {
+      formParameters(index);
+    });
+  });
 }
 init();
 
-toggleSearchFilters.addEventListener("change", requestImage);
+// searchCards.addEventListener("change", requestImage);
 
 nbRowElement.addEventListener("change", () => {
   if (currentSize != nbRowElement.value) {
@@ -52,6 +58,16 @@ function resetAll() {
   toggleSearchFilters.querySelectorAll("select").forEach((objet) => {
     objet.value = objet.options[0].text;
   });
+  toggleSearchFilters
+    .querySelectorAll("input[type='range']")
+    .forEach((objet) => {
+      objet.value = 0;
+    });
+  toggleSearchFilters
+    .querySelectorAll("input[type='number']")
+    .forEach((objet) => {
+      objet.value = 0;
+    });
 }
 
 async function initLists() {
@@ -64,16 +80,13 @@ async function initLists() {
 
 function initType() {
   let response = [
-    "Skill Card",
     "Spell Card",
     "Trap Card",
     "Normal Monster",
     "Normal Tuner Monster",
     "Effect Monster",
     "Tuner Monster",
-    "Flip Monster",
     "Flip Effect Monster",
-    "Flip Tuner Effect Monster",
     "Spirit Monster",
     "Union Effect Monster",
     "Gemini Monster",
@@ -278,10 +291,13 @@ async function requestImage() {
     .querySelectorAll(".tier.sort")
     .forEach((element) => (element.innerHTML = ""));
   images = [];
-  let response = await fetch(urlSearch).then((res) => res.json());
-  response.data.forEach((card) => {
-    images.push(card.card_images[0].image_url_cropped);
-  });
-  //   console.log(images);
-  getImages();
+  if (urlSearch != "https://db.ygoprodeck.com/api/v7/cardinfo.php?") {
+    let response = await fetch(urlSearch).then((res) => res.json());
+    response.data.forEach((card) => {
+      images.push(card.card_images[0].image_url_cropped);
+    });
+    //   console.log(images);
+    document.querySelector("#searchCards > div").classList.toggle("d-none");
+    getImages();
+  }
 }

@@ -6,10 +6,11 @@ function getImages() {
     <img class="fit-picture"
     id="img${index}"
   src="${element}"
-  alt="" width="100" height="100" draggable="true" ondragstart="dragstart_handler(event);"/>
+  alt="${index}" width="100" height="100" draggable="true" ondragstart="dragstart_handler(event);"/>
 
     `;
   }
+  document.querySelector("#searchCards > div").classList.toggle("d-none");
 }
 
 /**
@@ -55,17 +56,10 @@ function addRows(current, numberRow) {
                         </div>
                         <div class="tier sort" ondrop="drop_handler(event)" ondragover="dragover_handler(event);"></div>
                         <div class="settings-control">
-                            <div class="settings">
+                            <div class="settings" data-bs-toggle="modal" data-bs-target="#modalParameters">
                                 <i class="bi bi-gear-fill"></i>
                             </div>
-                            <div class="move-buttons">
-                                <div class="move-up">
-                                    <i class="bi bi-chevron-up"></i>
-                                </div>
-                                <div class="move-down">
-                                    <i class="bi bi-chevron-down"></i>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>`;
   }
