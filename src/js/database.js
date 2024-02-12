@@ -1,3 +1,4 @@
+const toggleSearchFilters = document.querySelector("#toggleSearchFilters");
 const tierContainer = document.querySelector("#tier-container");
 const typefilter = document.querySelector("#filter-type");
 const attributefilter = document.querySelector("#filter-attribute");
@@ -16,21 +17,26 @@ let currentSize = 7;
 function init() {
   nbRowElement.value = currentSize;
   initLists();
-  // toggleSearchFilters.querySelectorAll("select").forEach(async (objet) => {
-  //   objet.addEventListener("change", await requestImage());
-  // });
-  // toggleSearchFilters
-  //   .querySelectorAll("input[type='range']")
-  //   .forEach((element) => {
-  //     element.addEventListener("change", async () => {
-  //       var idObj = element.id.replace("card", "");
-  //       console.log(element.value);
-  //       document.querySelector(`#${idObj}Label`).value = element.value;
-  //       await requestImage();
-  //     });
-  //   });
+  toggleSearchFilters
+    .querySelectorAll("input[type='range']")
+    .forEach((element) => {
+      element.addEventListener("change", async () => {
+        var idObj = element.id.replace("card", "");
+        document.querySelector(`#${idObj}Label`).value = element.value;
+      });
+    });
+  toggleSearchFilters
+    .querySelectorAll("input[type='number']")
+    .forEach((element) => {
+      element.addEventListener("change", async () => {
+        var idObj = element.id.replace("Label", "");
+        document.querySelector(`#card${idObj}`).value = element.value;
+      });
+    });
 }
 init();
+
+toggleSearchFilters.addEventListener("change", requestImage);
 
 nbRowElement.addEventListener("change", () => {
   if (currentSize != nbRowElement.value) {
@@ -262,7 +268,7 @@ async function requestImage() {
       "input[type='number']"
     )[index];
     if (element.value != 0) {
-      urlSearch += `&${element.id.replace("card", "")}=${encodeURIComponent(
+      urlSearch += `&${element.id.replace("Label", "")}=${encodeURIComponent(
         element.value
       )}`;
     }
