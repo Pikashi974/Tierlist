@@ -1,0 +1,11 @@
+{
+  "name": "tierlist",
+  "version": "1.0.0",
+  "description": "A tool that allows you to drop an API so you can make your own tierlist",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jérémy Payet",
+  "license": "ISC"
+}
