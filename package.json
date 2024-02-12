@@ -5,15 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ."
+    "start": "electron ."
   },
   "author": "Jérémy Payet",
   "license": "ISC",
   "dependencies": {
+    "electron": "^28.2.2",
     "express": "^4.18.2",
     "path": "^0.12.7"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Pikashi974/Tierlist.git"

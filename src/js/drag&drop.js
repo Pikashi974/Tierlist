@@ -6,7 +6,6 @@ function dragstart_handler(ev) {
     return;
   }
   // Change the source element's background color to signify drag has started
-  ev.currentTarget.style.border = "dashed";
   // Add the id of the drag source element to the drag data payload so
   // it is available when the drop event is fired
   dti.add(ev.target.id, "text/plain");

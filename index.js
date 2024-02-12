@@ -1,14 +1,32 @@
+const { app, BrowserWindow } = require("electron");
+const path = require("node:path");
 const express = require("express");
-const app = express();
-const path = require("path");
-const port = 3000;
+const expressApp = require("./express"); //your express app
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "/src/html/index.html"));
+const createWindow = () => {
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    icon: path.join(__dirname, "src/img/icon.png"),
+    webPreferences: {
+      preload: path.join(__dirname, "src/js/preload.js"),
+      nodeIntegration: true,
+      contextIsolation: true,
+    },
+  });
+  // win.loadFile("src/ui/login.html");
+  win.loadURL("http://localhost:3000/");
+};
+
+app.whenReady().then(() => {
+  express();
+  createWindow();
+  app.on("activate", () => {
+    // Sur macOS il est commun de re-créer une fenêtre  lors
+    // du click sur l'icone du dock et qu'il n'y a pas d'autre fenêtre ouverte.
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
 });
-app.use("/src/js", express.static(path.join(__dirname, "src/js")));
-app.use("/src/css", express.static(path.join(__dirname, "src/css")));
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") app.quit();
 });
