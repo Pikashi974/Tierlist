@@ -68,3 +68,6 @@ i {
 img {
   cursor: pointer;
 }
+.form-group {
+  display: inline-flex;
+}

@@ -14,7 +14,7 @@ function dragstart_handler(ev) {
 }
 
 function dragover_handler(ev) {
-  console.log("dragOver");
+  // console.log("dragOver");
   var dti = ev.dataTransfer.items;
   if (dti === undefined || dti == null) {
     console.log("Browser does not support DataTransferItem interface");
@@ -22,7 +22,6 @@ function dragover_handler(ev) {
   }
   // Change the target element's border to signify a drag over event
   // has occurred
-  ev.currentTarget.style.background = "lightblue";
   ev.preventDefault();
 }
 
@@ -39,22 +38,22 @@ function drop_handler(ev) {
   // was explicitly added, the browser may include other items so need to search
   // for the plain/text item.
   for (var i = 0; i < dti.length; i++) {
-    console.log(
-      "Drop: item[" +
-        i +
-        "].kind = " +
-        dti[i].kind +
-        " ; item[" +
-        i +
-        "].type = " +
-        dti[i].type
-    );
+    // console.log(
+    //   "Drop: item[" +
+    //     i +
+    //     "].kind = " +
+    //     dti[i].kind +
+    //     " ; item[" +
+    //     i +
+    //     "].type = " +
+    //     dti[i].type
+    // );
     if (dti[i].kind == "string" && dti[i].type.match("^text/plain")) {
       // This item is the target node
       dti[i].getAsString(function (id) {
         // Only Move the element if the source and destination ids are both "move"
-        if (ev.target.classList.contains("sort"))
-          ev.target.appendChild(document.getElementById(id));
+        // if (ev.target.classList.contains("sort"))
+        ev.target.appendChild(document.getElementById(id));
       });
     }
   }
@@ -67,7 +66,7 @@ function dragend_handler(ev) {
     return;
   }
   // Restore source's border
-  ev.target.style.border = "solid black";
+  // ev.target.style.border = "solid black";
   // Remove all of the items from the list.
   dti.clear();
 }

@@ -5,11 +5,11 @@ const expressApp = require("./express"); //your express app
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1290,
+    height: 1080,
     icon: path.join(__dirname, "src/img/icon.png"),
     webPreferences: {
-      preload: path.join(__dirname, "src/js/preload.js"),
+      // preload: path.join(__dirname, "src/js/preload.js"),
       nodeIntegration: true,
       contextIsolation: true,
     },
