@@ -1,7 +1,8 @@
-function getImages() {
+async function getImages() {
   document.querySelector("#listImages").innerHTML = "";
   for (let index = 0; index < images.length; index++) {
     const element = images[index];
+    let url = await fetch(element).then((res) => res.url);
     // var proxyUrl = "https://cors-anywhere.herokuapp.com/";
     //   var proxyUrl = "http://localhost:8080/";
     //   toDataUrl(proxyUrl + element, function (data) {
@@ -21,7 +22,7 @@ function getImages() {
     document.querySelector("#listImages").innerHTML += `
       <img class="fit-picture"
       id="img${index}"
-    src="${element}"
+    src="${url}"
     alt="${index}" width="100" height="100" draggable="true" ondragstart="dragstart_handler(event);"/>
 
       `;
