@@ -2,13 +2,26 @@ function getImages() {
   document.querySelector("#listImages").innerHTML = "";
   for (let index = 0; index < images.length; index++) {
     const element = images[index];
-    document.querySelector("#listImages").innerHTML += `
+    // var proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    var proxyUrl = "http://localhost:8080/";
+    toDataUrl(proxyUrl + element, function (data) {
+      // console.log(data);
+      document.querySelector("#listImages").innerHTML += `
     <img class="fit-picture"
     id="img${index}"
-  src="${element}"
+  src="${data}"
   alt="${index}" width="100" height="100" draggable="true" ondragstart="dragstart_handler(event);"/>
 
     `;
+    });
+    // console.log(dataURL);
+    //   document.querySelector("#listImages").innerHTML += `
+    //   <img class="fit-picture"
+    //   id="img${index}"
+    // src="${element}"
+    // alt="${index}" width="100" height="100" draggable="true" ondragstart="dragstart_handler(event);"/>
+
+    //   `;
   }
   document.querySelector("#searchCards > div").classList.toggle("d-none");
 }
@@ -83,13 +96,27 @@ function exportImage() {
   document.querySelectorAll(".settings-control").forEach((element) => {
     element.classList.toggle("d-none");
   });
-  domtoimage.toPng(tierContainer).then(function (dataUrl) {
+  domtoimage.toPng(tierContainer).then(function (blob) {
     var link = document.createElement("a");
     link.download = "Tierlist.png";
-    link.href = dataUrl;
+    link.href = blob;
     link.click();
   });
   document.querySelectorAll(".settings-control").forEach((element) => {
     element.classList.toggle("d-none");
   });
+}
+
+function toDataUrl(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function () {
+    var reader = new FileReader();
+    reader.onloadend = function () {
+      callback(reader.result);
+    };
+    reader.readAsDataURL(xhr.response);
+  };
+  xhr.open("GET", url);
+  xhr.responseType = "blob";
+  xhr.send();
 }

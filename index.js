@@ -1,5 +1,7 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("node:path");
+const cors = require("cors-anywhere");
+const corsApp = require("./cors-anywhere");
 const express = require("express");
 const expressApp = require("./express"); //your express app
 
