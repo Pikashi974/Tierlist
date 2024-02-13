@@ -293,11 +293,21 @@ async function requestImage() {
   images = [];
   if (urlSearch != "https://db.ygoprodeck.com/api/v7/cardinfo.php?") {
     let response = await fetch(urlSearch).then((res) => res.json());
-    response.data.forEach((card) => {
-      images.push(card.card_images[0].image_url_cropped);
-    });
-    //   console.log(images);
+
+    let listeCards = response.data;
+    for (const card of listeCards) {
+      // let image_url = card.card_images[0].image_url_cropped;
+      let image_name = `${card.id}.jpg`;
+      let image_path = `/src/img/${image_name}`;
+      images.push(image_path);
+    }
+    // response.data.forEach((card) => {
+    //   images.push(card.card_images[0].image_url_cropped);
+    // });
     document.querySelector("#searchCards > div").classList.toggle("d-none");
     getImages();
   }
 }
+
+//
+// py getImages.py
