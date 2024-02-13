@@ -298,7 +298,7 @@ async function requestImage() {
     for (const card of listeCards) {
       // let image_url = card.card_images[0].image_url_cropped;
       let image_name = `${card.id}.jpg`;
-      let image_path = `/src/img/${image_name}`;
+      let image_path = `src/img/${image_name}`;
       images.push(image_path);
     }
     // response.data.forEach((card) => {
