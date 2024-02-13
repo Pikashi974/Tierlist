@@ -101,9 +101,9 @@ function exportImage() {
     link.download = "Tierlist.png";
     link.href = blob;
     link.click();
-  });
-  document.querySelectorAll(".settings-control").forEach((element) => {
-    element.classList.toggle("d-none");
+    document.querySelectorAll(".settings-control").forEach((element) => {
+      element.classList.toggle("d-none");
+    });
   });
 }
 
