@@ -68,6 +68,8 @@ function resetAll() {
     .forEach((objet) => {
       objet.value = 0;
     });
+
+  document.querySelector("#listImages").innerHTML = "";
 }
 
 async function initLists() {
