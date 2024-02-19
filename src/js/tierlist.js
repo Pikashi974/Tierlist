@@ -2,7 +2,18 @@ async function getImages() {
   document.querySelector("#listImages").innerHTML = "";
   for (let index = 0; index < images.length; index++) {
     const element = images[index];
-    let url = await fetch(element).then((res) => res.url);
+    let url = await fetch(element);
+    // let url = await fetch(element).then((res) => res.url);
+    if (url.status == 200) {
+      url = await fetch(element).then((res) => res.url);
+      document.querySelector("#listImages").innerHTML += `
+      <img class="fit-picture"
+      id="img${index}"
+    src="${url}"
+    alt="${index}" width="100" height="100" draggable="true" ondragstart="dragstart_handler(event);"/>
+
+      `;
+    }
     // var proxyUrl = "https://cors-anywhere.herokuapp.com/";
     //   var proxyUrl = "http://localhost:8080/";
     //   toDataUrl(proxyUrl + element, function (data) {
@@ -19,13 +30,6 @@ async function getImages() {
     //     );
     //   });
     // console.log(dataURL);
-    document.querySelector("#listImages").innerHTML += `
-      <img class="fit-picture"
-      id="img${index}"
-    src="${url}"
-    alt="${index}" width="100" height="100" draggable="true" ondragstart="dragstart_handler(event);"/>
-
-      `;
   }
   document.querySelector("#searchCards > div").classList.toggle("d-none");
 }
