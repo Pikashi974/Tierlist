@@ -62,6 +62,7 @@ clearTierlist.addEventListener("click", () => {
 });
 //fname
 function resetAll() {
+  toggleSearchFilters.querySelector("input[type='text']").value = "";
   toggleSearchFilters.querySelectorAll("select").forEach((objet) => {
     objet.value = objet.options[0].text;
   });
