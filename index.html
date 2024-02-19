@@ -41,6 +41,13 @@
     <main>
         <label for="adresseAPI" class="form-label mt-4">Parameters </label>
         <div class="p-3 border rounded bg-light collapse show" id="toggleSearchFilters" style="">
+            <div style="
+                margin-bottom: 1%;
+            ">
+                <label for="inputName" class="form-label mt-4">Search by name</label>
+                <input type="text" class="form-control" id="inputName" aria-describedby="emailHelp"
+                    placeholder="Enter the card name">
+            </div>
             <div class="form-group">
                 <select class="form-control" id="filter-type">
                     <option>Select Type</option>
@@ -132,6 +139,9 @@
                     onclick=" exportImage()">
                     Export the image
                 </button>
+                <button type="reset" id="clearTierlist" class="btn btn-danger btn-block"
+                    style="width:unset;display:inline-flex;margin-top:0px;align-items: center;">
+                    Clear tierlist </button>
             </div>
         </div>
         <!-- <div class="form-group">

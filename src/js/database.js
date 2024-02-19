@@ -8,7 +8,7 @@ const archetypeFilter = document.querySelector("#filter-archetype");
 const raritiesFilter = document.querySelector("#filter-rarity");
 const formatFilter = document.querySelector("#filter-format");
 const effectFilter = document.querySelector("#filter-effect");
-
+const clearTierlist = document.querySelector("#clearTierlist");
 const urlInput = document.querySelector("#adresseAPI");
 const nbRowElement = document.querySelector("#nbRows");
 
@@ -54,6 +54,13 @@ nbRowElement.addEventListener("change", () => {
   }
   currentSize = nbRowElement.value;
 });
+
+clearTierlist.addEventListener("click", () => {
+  document
+    .querySelectorAll(".tier.sort")
+    .forEach((element) => (element.innerHTML = ""));
+});
+//fname
 function resetAll() {
   toggleSearchFilters.querySelectorAll("select").forEach((objet) => {
     objet.value = objet.options[0].text;
@@ -68,8 +75,6 @@ function resetAll() {
     .forEach((objet) => {
       objet.value = 0;
     });
-
-  document.querySelector("#listImages").innerHTML = "";
 }
 
 async function initLists() {
@@ -261,6 +266,13 @@ function initRarities() {
 
 async function requestImage() {
   urlSearch = "https://db.ygoprodeck.com/api/v7/cardinfo.php?";
+  if (toggleSearchFilters.querySelector("input[type='text']").value != "") {
+    urlSearch += `&fname=${encodeURIComponent(
+      toggleSearchFilters.querySelector("input[type='text']").value
+    )}`;
+  }
+  // toggleSearchFilters.querySelector("input[type='text']")
+
   // console.log(objet.id.replace("filter-", ""));
   for (
     let index = 0;
@@ -289,9 +301,6 @@ async function requestImage() {
     }
   }
   console.log(urlSearch);
-  document
-    .querySelectorAll(".tier.sort")
-    .forEach((element) => (element.innerHTML = ""));
   images = [];
   if (urlSearch != "https://db.ygoprodeck.com/api/v7/cardinfo.php?") {
     let response = await fetch(urlSearch).then((res) => res.json());

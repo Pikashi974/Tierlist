@@ -1,4 +1,5 @@
 async function getImages() {
+  document.querySelector("#listImages").innerHTML = "";
   for (let index = 0; index < images.length; index++) {
     const element = images[index];
     let url = await fetch(element).then((res) => res.url);
