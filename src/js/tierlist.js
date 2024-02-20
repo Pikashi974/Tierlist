@@ -1,5 +1,6 @@
 async function getImages() {
   document.querySelector("#listImages").innerHTML = "";
+  listNumbers = images.map((element) => element.match(/[0-9]+/gm)[0]);
   for (let index = 0; index < images.length; index++) {
     const element = images[index];
     let url = await fetch(element);
@@ -8,7 +9,7 @@ async function getImages() {
       url = await fetch(element).then((res) => res.url);
       document.querySelector("#listImages").innerHTML += `
       <img class="fit-picture"
-      id="img${index}"
+      id="img${listNumbers[index]}"
     src="${url}"
     alt="${index}" width="100" height="100" draggable="true" ondragstart="dragstart_handler(event);"/>
 
