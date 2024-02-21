@@ -1,5 +1,5 @@
 function dragstart_handler(ev) {
-  console.log("dragStart");
+  // console.log("dragStart");
   var dti = ev.dataTransfer.items;
   if (dti === undefined || dti == null) {
     console.log("Browser does not support DataTransferItem interface");
@@ -26,7 +26,7 @@ function dragover_handler(ev) {
 }
 
 function drop_handler(ev) {
-  console.log("Drop");
+  // console.log("Drop");
   ev.preventDefault();
   var dti = ev.dataTransfer.items;
   if (dti === undefined || dti == null) {
@@ -51,15 +51,19 @@ function drop_handler(ev) {
     if (dti[i].kind == "string" && dti[i].type.match("^text/plain")) {
       // This item is the target node
       dti[i].getAsString(function (id) {
+        if (ev.target.nodeName == "IMG") {
+          ev.target.parentElement.appendChild(document.getElementById(id));
+        }
         // Only Move the element if the source and destination ids are both "move"
-        // if (ev.target.classList.contains("sort"))
-        ev.target.appendChild(document.getElementById(id));
+        else if (ev.target.classList.contains("sort")) {
+          ev.target.appendChild(document.getElementById(id));
+        }
       });
     }
   }
 }
 function dragend_handler(ev) {
-  console.log("dragEnd");
+  // console.log("dragEnd");
   var dti = ev.dataTransfer.items;
   if (dti === undefined || dti == null) {
     console.log("Browser does not support DataTransferItem interface");
