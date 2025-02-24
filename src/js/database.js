@@ -13,6 +13,7 @@ const urlInput = document.querySelector("#adresseAPI");
 const nbRowElement = document.querySelector("#nbRows");
 
 let images = [];
+let images_names = [];
 let currentSize = 7;
 
 function init() {
@@ -303,6 +304,7 @@ async function requestImage() {
   }
   console.log(urlSearch);
   images = [];
+  images_names = [];
   if (urlSearch != "https://db.ygoprodeck.com/api/v7/cardinfo.php?") {
     let response = await fetch(urlSearch).then((res) => res.json());
 
@@ -312,6 +314,7 @@ async function requestImage() {
       let image_name = `${card.id}.jpg`;
       let image_path = `src/img/${image_name}`;
       images.push(image_path);
+      image_name.push(card.name);
     }
     // response.data.forEach((card) => {
     //   images.push(card.card_images[0].image_url_cropped);
