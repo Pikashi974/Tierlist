@@ -314,7 +314,7 @@ async function requestImage() {
       let image_name = `${card.id}.jpg`;
       let image_path = `src/img/${image_name}`;
       images.push(image_path);
-      image_name.push(card.name);
+      images_names.push(card.name);
     }
     // response.data.forEach((card) => {
     //   images.push(card.card_images[0].image_url_cropped);
