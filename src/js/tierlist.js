@@ -10,7 +10,7 @@ async function getImages() {
       document.querySelector("#listImages").innerHTML += `
       <img class="fit-picture"
       id="img${listNumbers[index]}"
-      title="${image_name[index]}"
+      title="${images_names[index]}"
     src="${url}"
     alt="${index}" width="100" height="100" draggable="true" ondragstart="dragstart_handler(event);"/>
 
